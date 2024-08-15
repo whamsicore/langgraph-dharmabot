@@ -38,6 +38,12 @@ def route_gather(state: AgentState) -> Literal["draft_answer", END]:
     else:
         return END
 
+def custom_node(state: AgentState, config: GraphConfig) -> AgentState:
+    print("---Step 2---")
+    pass
+    
+
+# Add the custom node to the workflow
 
 # Define a new graph
 workflow = StateGraph(AgentState, input=MessagesState, output=OutputState, config_schema=GraphConfig)
@@ -45,9 +51,11 @@ workflow.add_node(draft_answer)
 workflow.add_node(gather_requirements)
 workflow.add_node(critique)
 workflow.add_node(check)
+workflow.add_node(custom_node)
 workflow.set_conditional_entry_point(route_start)
 workflow.add_conditional_edges("gather_requirements", route_gather)
-workflow.add_edge("draft_answer", "check")
+workflow.add_edge("draft_answer", "custom_node")
+workflow.add_edge("custom_node", "check")
 workflow.add_conditional_edges("check", route_check)
 workflow.add_conditional_edges("critique", route_critique)
 graph = workflow.compile()
