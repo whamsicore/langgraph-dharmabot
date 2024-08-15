@@ -1,10 +1,12 @@
-# LangGraph Engineer
+# LangGraph Dharmabot
 
-[Try out the deployed version](https://smith.langchain.com/studio/thread?baseUrl=https://langgraph-engineer-23dacb3822e3589d80ff57de9ee94e1c.default.us.langgraph.app)
+![](static/dharmabot.png)
 
-![](static/agent_ui.png)
-
-This is an alpha version of an agent that can help bootstrap [LangGraph](https://github.com/langchain-ai/langgraph) applications. It will focus on creating the correct nodes and edges, but will not attempt to write the logic to fill in the nodes and edges - rather will leave that for you.
+This is an alpha version of dharmabot, an agent designed to conversate and facilitate dharmaRPG. The alpha version aims at:
+- RAG capability: using neo4j graph db
+  - Retrieval
+  - Update 
+- Langgraph basics: ability to create and connect nodes
 
 ## Agent Details
 
@@ -17,15 +19,11 @@ The agent consists of a few steps:
 
 ## How to run
 
-[Try out the deployed version](https://smith.langchain.com/studio/thread?baseUrl=https://langgraph-engineer-23dacb3822e3589d80ff57de9ee94e1c.default.us.langgraph.app)
-
 You can run this code locally with [LangGraph Studio](https://github.com/langchain-ai/langgraph-studio)
 
 You can deploy the code yourself to [LangGraph Cloud](https://langchain-ai.github.io/langgraph/cloud/#overview)
 
 
 ## Future direction:
-
- - Run more programatic checks (linting, checking imports)
- - Try to run the generated code
- - Attempt to generate code for the nodes and edges
+ - Eventually, to become "compassionate"
+ - Character creator
