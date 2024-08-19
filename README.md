@@ -6,6 +6,7 @@ This is an alpha version of dharmabot, an agent designed to conversate and facil
 - RAG capability: using neo4j graph db
   - Retrieval
   - Update 
+- Add support for a cheaper model
 - Langgraph basics: ability to create and connect nodes
 
 ## Agent Details
@@ -25,5 +26,8 @@ You can deploy the code yourself to [LangGraph Cloud](https://langchain-ai.githu
 
 
 ## Future direction:
- - Eventually, to become "compassionate"
+ - Multi-modality
+   - receive images
+   - send images (generated based on prompt and level)
  - Character creator
+ - Eventually, to become "compassionate"

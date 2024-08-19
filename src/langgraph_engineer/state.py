@@ -4,8 +4,8 @@ class AgentState(MessagesState):
     requirements: str
     code: str
     accepted: bool
-
-
+    is_admin: bool
+    context: dict
 class OutputState(TypedDict):
     code: str
 

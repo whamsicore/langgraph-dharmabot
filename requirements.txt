@@ -1,0 +1,8 @@
+langchain
+openai
+neo4j
+langchain_community
+python-dotenv
+prettytable
+langchain-groq
+langchain-openai

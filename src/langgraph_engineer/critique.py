@@ -24,6 +24,22 @@ class Accept(BaseModel):
 
 
 def _swap_messages(messages):
+    """ purpose
+    Swaps the roles of messages between AI and user.
+    
+    This function takes a list of messages and swaps the roles:
+    - AI messages become user messages
+    - Non-AI messages (assumed to be user messages) become assistant messages
+    
+    This is useful for reframing the conversation history in a different perspective,
+    which can be helpful in certain critique or analysis scenarios.
+
+    Args:
+        messages (list): A list of message objects.
+
+    Returns:
+        list: A new list of messages with swapped roles.
+    """
     new_messages = []
     for m in messages:
         if isinstance(m, AIMessage):
