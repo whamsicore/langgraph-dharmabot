@@ -1,6 +1,6 @@
-from langgraph_engineer.loader import load_github_file
-from langgraph_engineer.model import _get_model
-from langgraph_engineer.state import AgentState
+from dharmabot.loader import load_github_file
+from dharmabot.model import _get_model
+from dharmabot.state import AgentState
 
 prompt = """You are tasked with answering questions about LangGraph functionality and bugs.
 Here is a long unit test file for LangGraph. This should contain a lot (but possibly not all) \

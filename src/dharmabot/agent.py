@@ -3,21 +3,26 @@ from typing import Literal
 from langgraph.graph import StateGraph, END, MessagesState
 from langchain_core.messages import AIMessage
 
-from langgraph_engineer.check import check
-from langgraph_engineer.critique import critique
-from langgraph_engineer.draft import draft_answer
-from langgraph_engineer.gather_requirements import gather_requirements
-from langgraph_engineer.state import AgentState, OutputState, GraphConfig
-
-
-
-def route_is_admin(state: AgentState) -> Literal["is_admin", "is_not_admin"]:
-    if isinstance(state['isAdmin'][-1], AIMessage):
-        return "critique"
-    else:
-        return "draft_answer"
+from dharmabot.nodes.check import check
+from dharmabot.nodes.critique import critique
+from dharmabot.nodes.draft import draft_answer
+from dharmabot.nodes.gather_requirements import gather_requirements
+from dharmabot.state import AgentState, OutputState, GraphConfig
+from dotenv import load_dotenv
 from neo4j import GraphDatabase
-from typing import Dict
+import os
+load_dotenv()
+
+
+os.environ["NEO4J_URI"] = os.getenv("neo4j_url")
+os.environ["NEO4J_USERNAME"] = os.getenv("neo4j_username")
+os.environ["NEO4J_PASSWORD"] = os.getenv("neo4j_pw")
+
+
+
+
+
+
 
 def remember_user(state: AgentState, config: GraphConfig) -> AgentState:
     user_id = state.get('context', {}).get('user_id')

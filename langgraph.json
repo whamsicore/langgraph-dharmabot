@@ -5,7 +5,7 @@
     "."
   ],
   "graphs": {
-    "engineer": "./src/langgraph_engineer/agent.py:graph"
+    "test": "./src/dharmabot/agent.py:graph"
   },
   "env": [
     "OPENAI_API_KEY"

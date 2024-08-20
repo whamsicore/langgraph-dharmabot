@@ -6,3 +6,5 @@ python-dotenv
 prettytable
 langchain-groq
 langchain-openai
+langgraph
+pyvis
