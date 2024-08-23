@@ -2,3 +2,5 @@ myenv
 .env
 .ipynb_checkpoints
 .langgraph-data
+.next
+node_modules

@@ -1,6 +1,6 @@
-from langgraph_engineer.loader import load_github_file
-from langgraph_engineer.model import _get_model
-from langgraph_engineer.state import AgentState
+from dharmabot.loader import load_github_file
+from dharmabot.model import _get_model
+from dharmabot.state import AgentState
 from langchain_core.messages import AIMessage
 from langchain_core.pydantic_v1 import BaseModel
 

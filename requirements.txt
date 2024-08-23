@@ -8,3 +8,4 @@ langchain-groq
 langchain-openai
 langgraph
 pyvis
+websockets

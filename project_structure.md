@@ -1,0 +1,57 @@
+# Project Structure
+
+```
+langgraph-dharmabot/
+    pnpm-lock.yaml
+    server.py
+    project_structure.md
+    requirements.txt
+    server.js
+    graph.html
+    pyproject.toml
+    next-env.d.ts
+    README.md
+    langgraph.json
+    package.json
+    .env
+    tsconfig.json
+    run_server.py
+    memos/
+        8-21-2024.md
+    app/
+        layout.tsx
+        page.tsx
+        globals.css
+        components/
+            chat.tsx
+            visualization.tsx
+    static/
+        dharmabot.png
+        dharmatoken2.png
+        Dharma.mp4
+    src/
+        dharmabot/
+            __init__.py
+            model.py
+            utils.py
+            loader.py
+            agent.py
+            state.py
+            tools/
+            nodes/
+                check.py
+                gather_requirements.py
+                critique.py
+                draft.py
+            tests/
+                README.md
+            utils/
+            scripts/
+                test_1.py
+                flatten_edit_test.py
+                test_env.py
+                generate_project_structure.py
+                test_chain.py
+                test_2.py
+            edges/
+```
