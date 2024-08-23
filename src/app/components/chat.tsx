@@ -113,7 +113,7 @@ export default function Chat() {
           <div key={msg.id} className={`${styles.messageWrapper} ${msg.sender_type === 'User' ? styles.userMessage : styles.systemMessage}`}>
             <div className={styles.messageBubble}>
               <span className={styles.timestamp}>{new Date(msg.timestamp).toLocaleString()}</span>
-              <p className={styles.messageContent}>{msg.content}</p>
+              <p className={`${styles.messageContent} text-black`}>{msg.content}</p>
             </div>
           </div>
         ))}
@@ -125,7 +125,7 @@ export default function Chat() {
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-          className={styles.inputField}
+          className={`${styles.inputField} text-black`}
           placeholder="Type a message..."
         />
         <button
