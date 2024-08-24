@@ -1,3 +1,5 @@
+/* This file contains CSS styling for various components of a chat interface, including chat messages, user input fields, and loading animations. The purpose of this file is to define the visual appearance and layout of the chat interface within the DharmaBot UI, ensuring a cohesive and user-friendly design for interacting with the Neo4j graph database. */
+
 .chatContainer {
   height: 100%;
   display: flex;
@@ -91,4 +93,24 @@
 
 .sendButton:hover {
   background-color: #0056b3;
+}
+
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

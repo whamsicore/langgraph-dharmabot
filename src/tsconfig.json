@@ -1,3 +1,5 @@
+# This file is a TypeScript configuration file (tsconfig.json) used for setting compiler options and defining which files to include or exclude during compilation. In the context of DharmaBot UI, this file specifies how TypeScript files should be compiled, including settings like which libraries to include, the module system to use, and which files to include or exclude.
+
 {
   "compilerOptions": {
     "lib": [

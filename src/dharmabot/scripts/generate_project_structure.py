@@ -1,3 +1,7 @@
+"""
+This script generates a tree structure of a project directory and writes it to a Markdown file. It iterates through the project directory, excluding specified folders and files, and creates a hierarchical representation of the project's structure. In the context of DharmaBot UI, this script could be used to visualize and analyze the directory structures of projects stored in a graph database, providing a clear overview of the relationships between files and folders.
+"""
+
 import os
 
 def should_ignore(path):

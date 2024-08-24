@@ -1,3 +1,7 @@
+"""
+This file contains a function called `draft_answer` that retrieves a unit test file from a specific GitHub URL related to LangGraph, incorporates it into a prompt message, and then uses a model to generate a response based on user input and the provided file content. The purpose of this script is to draft answers to user questions about LangGraph functionality and bugs by leveraging the information from the unit test file and a machine learning model.
+"""
+
 from dharmabot.loader import load_github_file
 from dharmabot.model import _get_model
 from dharmabot.state import AgentState

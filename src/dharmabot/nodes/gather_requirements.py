@@ -1,3 +1,7 @@
+"""
+This file contains Python code related to gathering requirements for the DharmaBot UI. It includes functions to flatten a nested list of prompts, define a build class with requirements, and gather requirements based on prompts provided in the 'gather_prompt' list. The purpose of this code is to facilitate the process of collecting user requirements for the DharmaBot UI by presenting specific prompts and extracting necessary information for further processing.
+"""
+
 from dharmabot.model import _get_model
 from dharmabot.state import AgentState
 from typing import TypedDict

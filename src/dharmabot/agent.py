@@ -1,3 +1,7 @@
+"""
+This file appears to define a series of functions and configurations related to setting up a graph-based conversation flow for DharmaBot UI. Functions like `route_start`, `route_check`, `route_gather`, and `route_critique` determine the flow of the conversation based on the current state. The file also sets up a `StateGraph` using the defined functions to create a structured conversation flow within the DharmaBot UI.
+"""
+
 from typing import Literal
 
 from langgraph.graph import StateGraph, END, MessagesState

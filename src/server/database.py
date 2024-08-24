@@ -1,3 +1,7 @@
+"""
+This Python file defines a class 'Neo4jDatabase' that serves as an interface to interact with a Neo4j graph database. It includes methods to establish a connection, close the connection, test the connection, retrieve messages, add messages, and run custom queries on the database. This file's purpose is to provide functionality for interacting with the Neo4j database, specifically for handling messages and custom queries within the context of the DharmaBot UI.
+"""
+
 from neo4j import GraphDatabase
 
 class Neo4jDatabase:
@@ -63,3 +67,11 @@ class Neo4jDatabase:
                 'timestamp': str(message['timestamp']),
                 'sender_type': sender_type
             }
+
+    def run_query(self, query, parameters=None):
+        """
+        Run a custom query on the Neo4j database.
+        """
+        with self.driver.session(database="neo4j") as session:
+            result = session.run(query, parameters)
+            return list(result)

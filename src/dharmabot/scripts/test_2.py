@@ -1,3 +1,7 @@
+"""
+This file appears to be a Python script that interacts with a Neo4j graph database to query and display instructions and their connections. It sets up the necessary environment variables for connecting to the Neo4j database, performs a query to retrieve instructions and their relationships, and then prints out the results. Additionally, there are commented-out sections that suggest potential visualization of the graph data using pyvis network. Overall, the purpose of this script seems to be querying and displaying graph data related to instructions in the context of DharmaBot UI.
+"""
+
 import os
 from dotenv import load_dotenv
 from pyvis.network import Network

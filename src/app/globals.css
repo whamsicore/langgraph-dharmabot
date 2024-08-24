@@ -1,3 +1,5 @@
+/* This file appears to be a CSS file containing styling information for the DharmaBot UI interface. It defines variables for foreground and background colors based on light and dark color schemes, and sets global styles for body elements like color and background gradients. The purpose of this file is to control the visual appearance of the DharmaBot UI interface, ensuring a consistent and user-friendly design. */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,3 +29,12 @@ body {
 }
 
 /* Add any additional global styles below */
+.resizer {
+  width: 5px;
+  background-color: #ccc;
+  cursor: col-resize;
+}
+
+.resizer:hover {
+  background-color: #999;
+}

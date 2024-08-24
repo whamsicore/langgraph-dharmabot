@@ -1,8 +1,10 @@
+// This file content represents a React component called Chat, which serves as a chat interface. It manages WebSocket connections to send and receive messages, displays messages in real-time with timestamps, and provides functionality to send messages, along with sound effects for message sending and receiving. The component also handles error messages and loading indicators for a seamless chat experience within a UI.
+
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import useSound from 'use-sound';
-import styles from './Chat.module.css';
+import styles from './chat.module.css';
 
 interface Message {
   id: string;
@@ -16,8 +18,10 @@ export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [play_send_sfx] = useSound('/sounds/menu-open.mp3');
+  const [play_receive_sfx] = useSound('/sounds/keyboard/FUI Button Hi-Tech.wav');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -33,8 +37,11 @@ export default function Chat() {
       setError(null);
     };
     ws.onmessage = (event) => {
+      console.log('WebSocket message received:');
       const data = JSON.parse(event.data);
       if (data.type === 'chat') {
+        setIsLoading(false);
+        // play_receive_sfx();
         if (Array.isArray(data.messages)) {
           setMessages(data.messages.map(msg => ({
             ...msg,
@@ -59,7 +66,7 @@ export default function Chat() {
     };
 
     setSocket(ws);
-  }, []);
+  }, [play_receive_sfx]);
 
   useEffect(() => {
     connectWebSocket();
@@ -72,7 +79,6 @@ export default function Chat() {
 
   const sendMessage = () => {
     if (inputMessage.trim()) {
-      // Play the send sound
       play_send_sfx();
       
       if (socket && socket.readyState === WebSocket.OPEN) {
@@ -83,10 +89,8 @@ export default function Chat() {
           sender_type: 'User'
         };
         
-        // Add the message to the conversation state
         setMessages(prevMessages => [...prevMessages, newMessage]);
         
-        // Send the message through WebSocket
         const messageData = {
           type: 'chat',
           content: inputMessage,
@@ -94,9 +98,7 @@ export default function Chat() {
         };
         socket.send(JSON.stringify(messageData));
         
-        
-        
-        // Clear the input field
+        setIsLoading(true);
         setInputMessage('');
       } else {
         setError('WebSocket is not connected. Unable to send message.');
@@ -106,7 +108,6 @@ export default function Chat() {
 
   return (
     <div className={styles.chatContainer}>
-      <h1 className={styles.chatTitle}>Chat Interface</h1>
       {error && <p className={styles.errorMessage}>{error}</p>}
       <div className={styles.messageContainer}>
         {messages.map((msg) => (
@@ -117,6 +118,11 @@ export default function Chat() {
             </div>
           </div>
         ))}
+        {isLoading && (
+          <div className={styles.loaderWrapper}>
+            <div className={styles.loader}></div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
       <div className={styles.inputContainer}>

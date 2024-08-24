@@ -1,9 +1,15 @@
+"""
+This file contains a Python class `MessageHandler` that handles messages for a chatbot powered by two different language models (LLMs). It interacts with a database to store and retrieve messages, generates AI responses based on the conversation history, and sends those responses back to the user. The purpose of this file is to manage communication between users and the AI assistant, utilizing both OpenAI and Groq language models to generate responses.
+"""
+
 import json
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 from langchain.schema import HumanMessage, SystemMessage
 import os
 from dotenv import load_dotenv
+import asyncio
+import traceback
 
 load_dotenv()
 
@@ -28,6 +34,7 @@ class MessageHandler:
             max_retries=2,
         )
         self.system_message = SystemMessage(content="You are a helpful AI assistant.")
+        self.message_lock = asyncio.Lock()
 
     async def handle(self, websocket, path):
         self.connected.add(websocket)
@@ -38,22 +45,43 @@ class MessageHandler:
             async for websocket_message in websocket:
                 data = json.loads(websocket_message)
                 if data["type"] == "chat":
-                    user_message = self.database.add_message(data["content"], data["sender_type"])
-                    
-                    try:
-                        ai_response = self.generate_ai_response(chat_history + [user_message])
-                        ai_message = self.database.add_message(ai_response, "Agent")
+                    async with self.message_lock:
+                        user_message = self.database.add_message(data["content"], data["sender_type"])
                         
-                        chat_history.extend([user_message, ai_message])
-                        
-                        for conn in self.connected:
-                            await conn.send(json.dumps({"type": "chat", "message": ai_message}))
-                    except Exception as e:
-                        print(f"Error generating AI response: {e}")
-                        error_message = self.database.add_message("Sorry, I encountered an error while processing your request.", "Agent")
-                        await websocket.send(json.dumps({"type": "chat", "message": error_message}))
+                        try:
+                            ai_response = self.generate_ai_response(chat_history + [user_message])
+                            ai_message = self.database.add_message(ai_response, "Agent")
+                            
+                            await websocket.send(json.dumps({"type": "chat", "message": ai_message}))
+                        except Exception as e:
+                            print(f"Error generating AI response: {e}")
+                            error_message = self.database.add_message("Sorry, I encountered an error while processing your request.", "Agent")
+                            await websocket.send(json.dumps({"type": "chat", "message": error_message}))
         finally:
             self.connected.remove(websocket)
+
+    async def handle_message(self, content, sender_type):
+        print(f"Handling message: content='{content}', sender_type='{sender_type}'")
+        async with self.message_lock:
+            try:
+                user_message = self.database.add_message(content, sender_type)
+                print(f"User message added: {user_message}")
+                
+                chat_history = self.database.get_messages()
+                print(f"Chat history retrieved, length: {len(chat_history)}")
+                
+                ai_response = self.generate_ai_response(chat_history)
+                print(f"AI response generated: '{ai_response[:50]}...'")
+                
+                ai_message = self.database.add_message(ai_response, "Agent")
+                print(f"AI message added: {ai_message}")
+                
+                return ai_message
+            except Exception as e:
+                print(f"Error in handle_message: {e}")
+                print(traceback.format_exc())
+                error_message = self.database.add_message("Sorry, I encountered an error while processing your request.", "Agent")
+                return error_message
 
     def generate_ai_response(self, conversation):
         # Convert conversation to a format suitable for the LLM
@@ -76,6 +104,7 @@ class MessageHandler:
             return response.content
         except Exception as e:
             print(f"Debug: Error invoking LLM: {str(e)}")
+            print(traceback.format_exc())
             raise
 
 __all__ = ['MessageHandler']

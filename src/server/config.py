@@ -1,3 +1,7 @@
+"""
+This file contains functions related to loading configuration variables, printing Neo4j environment variables, testing DNS resolution, and resolving hostnames to IP addresses using sockets in Python. These functions aim to handle configurations, environment variables, and network-related tasks, which could be utilized in the DharmaBot UI for setting up connections to Neo4j databases, resolving hostnames, and managing API keys.
+"""
+
 import os
 from dotenv import load_dotenv, find_dotenv
 import socket

@@ -1,3 +1,7 @@
+"""
+This Python file seems to be a part of the DharmaBot UI system. It includes functions related to critiquing a developer's work on building a LangGraph application. The `critique` function loads a unit test file from a GitHub URL, prompts for a critique based on the content, swaps message roles between AI and user, and then invokes a model to provide feedback on the developer's work.
+"""
+
 from dharmabot.loader import load_github_file
 from dharmabot.model import _get_model
 from dharmabot.state import AgentState

@@ -1,3 +1,7 @@
+"""
+This file is focused on setting up connections to various APIs and resources required for DharmaBot UI functionality. It initializes OpenAI and Neo4j connections, loads environment variables, creates prompts for interacting with the APIs, generates Cypher queries based on user instructions, and executes those queries on a Neo4j graph database. Additionally, it includes functionality for interacting with language models for generating responses based on prompts given to the system.
+"""
+
 from dharmabot.utils import flatten_list
 from langchain_community.llms import OpenAI
 from langchain.prompts import PromptTemplate, ChatPromptTemplate

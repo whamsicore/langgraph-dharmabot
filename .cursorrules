@@ -1,0 +1,6 @@
+
+always use snake case for naming variables and functions. 
+Try to name them based on the purpose. 
+favor long descriptive names, over short ones. 
+All files should have a comment at the beginning that describes its purpose. 
+Do not delete the comments. 

@@ -1,3 +1,7 @@
+"""
+This file is a Python script that aims to move a specific function called 'flatten_list' from one file ('test_chain.py') to another file ('utils.py'). It reads the content of the current file, adds the function to the 'utils.py' file if it doesn't exist, updates the current file by adding an import statement for the function, and then removes the function definition from the current file. Finally, it writes the updated content back to the current file and prints a success message. This script automates the process of moving a function between files in the context of DharmaBot UI.
+"""
+
 import os
 import re
 

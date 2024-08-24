@@ -1,3 +1,7 @@
+"""
+This file contains a function that is responsible for getting a specific chat model based on the configuration provided. It checks the model type specified in the configuration and returns an instance of either ChatOpenAI or ChatAnthropic with predefined parameters. This function is crucial for dynamically selecting and initializing the appropriate chat model based on the user's choice within the DharmaBot UI.
+"""
+
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 

@@ -1,3 +1,7 @@
+"""
+This file appears to contain Python functions related to handling and processing Python code blocks within text messages. The `extract_python_code` function extracts Python code snippets from text, while the `check` function checks for the presence and correctness of a single Python code block in the last answer of the conversation, providing appropriate error messages if needed. This file seems to be part of the DharmaBot UI's functionality to assist users in interacting with Python code snippets.
+"""
+
 import re
 from dharmabot.state import AgentState
 

@@ -1,3 +1,7 @@
+"""
+This Python script sets up a demo environment in a Neo4j graph database for the DharmaBot UI. It creates a conversation with messages exchanged between a user and an agent. The purpose of this script is to initialize a sample graph structure for demonstration and testing purposes within the DharmaBot UI environment.
+"""
+
 from neo4j import GraphDatabase
 import os
 from dotenv import load_dotenv

@@ -7,6 +7,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>DharmabotUI</title>
+        <link rel="icon" href="/favicon.png" sizes="any" />
+      </head>
       <body className="h-screen m-0 p-0">{children}</body>
     </html>
   )

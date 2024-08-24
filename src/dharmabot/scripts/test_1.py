@@ -1,3 +1,7 @@
+"""
+This file appears to serve as a script for interacting with various components of the DharmaBot UI system. It includes sections for utilizing OpenAI models, executing Groq queries, interacting with Neo4j graph database, and creating prompts for generating responses. The script demonstrates the functionality of translating text, generating responses, and querying a Neo4j database, showcasing the capabilities of DharmaBot UI in handling different types of interactions.
+"""
+
 from langchain_community.llms import OpenAI
 from langchain.prompts import PromptTemplate, ChatPromptTemplate
 from neo4j import GraphDatabase, basic_auth
