@@ -10,6 +10,7 @@ import os
 from dotenv import load_dotenv
 import asyncio
 import traceback
+from server.agents.groq_basic import groq_basic 
 
 load_dotenv()
 
@@ -84,27 +85,6 @@ class MessageHandler:
                 return error_message
 
     def generate_ai_response(self, conversation):
-        # Convert conversation to a format suitable for the LLM
-        messages = [self.system_message]  # This is already a SystemMessage object
-        for msg in conversation:
-            role = "assistant" if msg["sender_type"] == "Agent" else "user"
-            messages.append(HumanMessage(content=msg["content"]) if role == "user" else SystemMessage(content=msg["content"]))
-        
-        print("Debug: Formatted messages for LLM:")
-        for msg in messages:
-            print(f"  Role: {msg.__class__.__name__}, Content: {msg.content[:50]}...")
-        
-        # Choose which LLM to use (you can implement logic to switch between them)
-        llm = self.llm_groq  # or self.llm_openai
-        print(f"Debug: Using LLM: {type(llm).__name__}")
-        
-        try:
-            response = llm.invoke(messages)
-            print(f"Debug: LLM response received. Length: {len(response.content)}")
-            return response.content
-        except Exception as e:
-            print(f"Debug: Error invoking LLM: {str(e)}")
-            print(traceback.format_exc())
-            raise
+        return groq_basic(conversation, self.system_message, self.llm_openai, self.llm_groq)  # Updated call
 
 __all__ = ['MessageHandler']

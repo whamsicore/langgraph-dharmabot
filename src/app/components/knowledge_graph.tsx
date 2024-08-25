@@ -6,7 +6,7 @@ import * as d3 from 'd3';
 // Update the Node interface
 interface Node extends d3.SimulationNodeDatum {
   id: string;
-  label: string;
+  label: string;ˆ
   type: string;
 }
 

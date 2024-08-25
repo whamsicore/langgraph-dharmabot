@@ -29,6 +29,8 @@ async def handle_connection(websocket, path):
         # Keep the connection open and handle incoming messages
         while True:
             try:
+                # Wait for a message from the WebSocket client with a 30-second timeout
+                # This prevents the connection from hanging indefinitely if no message is received
                 message = await asyncio.wait_for(websocket.recv(), timeout=30)
                 print(f"Received message: {message}")
                 data = json.loads(message)
@@ -72,13 +74,14 @@ async def main():
         message_handler = MessageHandler(db)
         graph_handler = GraphHandler(db)
 
+        # Start the WebSocket server
         server = await websockets.serve(
-            handle_connection,
-            "0.0.0.0",
-            3001,
-            ping_interval=20,
-            ping_timeout=60,
-            process_request=lambda path, headers: None
+            handle_connection,  # The main function to handle incoming WebSocket connections
+            "0.0.0.0",  # Listen on all available network interfaces
+            3001,  # Port number to listen on
+            ping_interval=20,  # Send a ping every 20 seconds to keep the connection alive
+            ping_timeout=60,  # Close the connection if no pong is received within 60 seconds
+            process_request=lambda path, headers: None  # Disable HTTP request processing
         )
         print("WebSocket server started on ws://0.0.0.0:3001")
         await server.wait_closed()

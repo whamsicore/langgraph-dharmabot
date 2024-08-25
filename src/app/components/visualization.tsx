@@ -7,6 +7,8 @@ import GraphSelector from './graph_selector';
 import ConversationGraph from './conversation_graph';
 import KnowledgeGraph from './knowledge_graph';
 import EntityGraph from './entity_graph';
+import SelectedNodesDisplay from './SelectedNodesDisplay'; // Import the new component
+import { NodeSelectionProvider } from '../context/node_selection_context'; // Import the context provider
 
 const GRAPH_TYPES = ['Conversation', 'Knowledge', 'Entity'];
 const WS_URL = 'ws://localhost:3001';
@@ -80,15 +82,22 @@ export default function Visualization() {
   };
 
   return (
-    <div className="w-full h-full bg-gray-900 flex flex-col">
-      <GraphSelector
-        graph_types={GRAPH_TYPES}
-        selected_graph={selected_graph}
-        on_select_graph={set_selected_graph}
-      />
-      <div className="flex-grow">
-        {render_selected_graph()}
+    <NodeSelectionProvider>
+      <div className="w-full h-full bg-gray-900 flex flex-col">
+        <GraphSelector
+          graph_types={GRAPH_TYPES}
+          selected_graph={selected_graph}
+          on_select_graph={set_selected_graph}
+        />
+        <div className="flex-grow flex">
+          <div className="flex-grow">
+            {render_selected_graph()}
+          </div>
+        </div>
+        <div className="w-full">
+          <SelectedNodesDisplay />
+        </div>
       </div>
-    </div>
+    </NodeSelectionProvider>
   );
 }

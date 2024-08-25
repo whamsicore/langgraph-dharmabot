@@ -27,6 +27,9 @@ def should_ignore(path):
     return any(ignored in path for ignored in ignore_list)
 
 def generate_tree(startpath, output_file):
+    # Ensure the directory exists before creating the file
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    
     with open(output_file, 'w') as f:
         f.write("# Project Structure\n\n")
         f.write("```\n")
@@ -44,7 +47,7 @@ def generate_tree(startpath, output_file):
 
 # Assuming this script is run from the project root
 project_root = os.getcwd()
-output_file = os.path.join(project_root, 'project_structure.md')
+output_file = os.path.join(project_root, 'outputs', 'project_structure.md')
 
 generate_tree(project_root, output_file)
 print(f"Project structure has been written to {output_file}")
